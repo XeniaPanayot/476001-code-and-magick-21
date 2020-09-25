@@ -1,4 +1,11 @@
 'use strict';
+/* global fireballSize */
+/* global getFireballSpeed */
+/* global wizardSpeed */
+/* global getWizardHeight */
+/* global getWizardX */
+/* global wizardWidth */
+/* global getWizardY */
 
 window.GameConstants = {
   Fireball: {
