@@ -6,7 +6,7 @@ const CLOUD_X = 100;
 const CLOUD_Y = 10;
 const GAP_BETWEEN_BARS = 50;
 const BAR_WIDTH = 40;
-const BAR_MAXHEIGHT = 150; // given;
+const BAR_MAXHEIGHT = 150;
 const BAR_BOTTOM_Y = 240;
 
 const renderCloud = function (ctx, x, y, color) {
@@ -29,18 +29,10 @@ window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + 10, CLOUD_Y + 10, `rgba(0, 0, 0, 0.3)`);
   // Cloud
   renderCloud(ctx, CLOUD_X, CLOUD_Y, `#ffffff`);
-  // Intro text
-  // ctx.font = `16px PT Mono`;
-  // ctx.textBaseline = `hanging`;
   ctx.fillStyle = `#000000`;
   ctx.fillText(`Ура вы победили!`, 150, 30);
   ctx.fillText(`Список результатов:`, 150, 50);
 
-
-  // bar 1 color
-  ctx.fillStyle = `hsl(0, 100%, 50%)`;
-  // other bar colors
-  ctx.fillStyle = `hsl(240, 100%, 50%)`;
   const getRandomColor = function () {
     return `hsl(240, ${Math.round(Math.random() * 100)}%, 50%)`;
   };
@@ -61,14 +53,14 @@ window.renderStatistics = function (ctx, names, times) {
         BAR_WIDTH,
         (BAR_MAXHEIGHT * times[i]) / maxTime
     );
-    // Text
+    // Name
     ctx.fillStyle = `#000000`;
     ctx.fillText(
         names[i],
         barX,
         barY + (BAR_MAXHEIGHT * times[i]) / maxTime + 30
     );
-    // number
+    // Number
     ctx.fillStyle = `#000000`;
     ctx.fillText(
         Math.round(times[i]),
