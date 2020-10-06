@@ -13,42 +13,42 @@ const setupWizardTemplate = document.querySelector(`#similar-wizard-template`)
 .content
 .querySelector(`.setup-similar-item`); // HERE to the div inside the template tag
 
-const wizards = [
-  {
-    name: WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)] + ` ` + WIZARD_SURNAMES[Math.floor(Math.random() * WIZARD_NAMES.length)],
-    coatColor: WIZARD_COLOR[Math.floor(Math.random() * WIZARD_COLOR.length)],
-    eyesColor: WIZARD_EYES[Math.floor(Math.random() * WIZARD_COLOR.length)]
-  },
-  {
-    name: WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)] + ` ` + WIZARD_SURNAMES[Math.floor(Math.random() * WIZARD_NAMES.length)],
-    coatColor: WIZARD_COLOR[Math.floor(Math.random() * WIZARD_COLOR.length)],
-    eyesColor: WIZARD_EYES[Math.floor(Math.random() * WIZARD_COLOR.length)]
-  },
-  {
-    name: WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)] + ` ` + WIZARD_SURNAMES[Math.floor(Math.random() * WIZARD_NAMES.length)],
-    coatColor: WIZARD_COLOR[Math.floor(Math.random() * WIZARD_COLOR.length)],
-    eyesColor: WIZARD_EYES[Math.floor(Math.random() * WIZARD_COLOR.length)]
-  },
-  {
-    name: WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)] + ` ` + WIZARD_SURNAMES[Math.floor(Math.random() * WIZARD_NAMES.length)],
-    coatColor: WIZARD_COLOR[Math.floor(Math.random() * WIZARD_COLOR.length)],
-    eyesColor: WIZARD_EYES[Math.floor(Math.random() * WIZARD_COLOR.length)]
-  }
-];
+// make patterns be chosen randomly
+const getRandomItem = function (wizardPattern) {
+  return wizardPattern[Math.floor(Math.random() * wizardPattern.length)];
+};
 
-const renderWizard = function (wizard) {
+// algorythm for making a wizard
+const getWizard = () => ({
+  name: getRandomItem(WIZARD_NAMES) + ` ` + getRandomItem(WIZARD_SURNAMES),
+  coatColor: getRandomItem(WIZARD_COLOR),
+  eyesColor: getRandomItem(WIZARD_EYES),
+});
+
+// array of 4 wizards
+const wizardsArr = [];
+const getWizardsArr = function (countWizards) {
+  for (let i = 0; i < countWizards; i++) {
+    wizardsArr.push(getWizard());
+  }
+};
+getWizardsArr(4);
+
+
+const renderWizard = function (getWizard) {
   const wizardElement = setupWizardTemplate.cloneNode(true);
-  wizardElement.querySelector(`.setup-similar-label`).textContent = wizard.name;
-  wizardElement.querySelector(`.wizard-coat`).style.fill = wizard.coatColor;
-  wizardElement.querySelector(`.wizard-eyes`).style.fill = wizard.eyesColor;
+  wizardElement.querySelector(`.setup-similar-label`).textContent = getWizard.name;
+  wizardElement.querySelector(`.wizard-coat`).style.fill = getWizard.coatColor;
+  wizardElement.querySelector(`.wizard-eyes`).style.fill = getWizard.eyesColor;
 
   return wizardElement;
 };
 
+
 const fragment = document.createDocumentFragment();
 
-for (let i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
+for (let i = 0; i < wizardsArr.length; i++) {
+  fragment.appendChild(renderWizard(wizardsArr[i]));
 }
 
 setupList.appendChild(fragment);
