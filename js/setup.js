@@ -19,11 +19,13 @@ const getRandomItem = function (wizardPattern) {
 };
 
 // algorythm for making a wizard
-const getWizard = () => ({
-  name: getRandomItem(WIZARD_NAMES) + ` ` + getRandomItem(WIZARD_SURNAMES),
-  coatColor: getRandomItem(WIZARD_COLOR),
-  eyesColor: getRandomItem(WIZARD_EYES),
-});
+const getWizard = function () {
+  return ({
+    name: getRandomItem(WIZARD_NAMES) + ` ` + getRandomItem(WIZARD_SURNAMES),
+    coatColor: getRandomItem(WIZARD_COLOR),
+    eyesColor: getRandomItem(WIZARD_EYES),
+  });
+};
 
 // array of 4 wizards
 const wizardsArr = [];
@@ -35,16 +37,17 @@ const getWizardsArr = function () {
   return wizardsArr;
 };
 
-getWizardsArr(4);
+getWizardsArr(countWizards);
 
-const renderWizard = function (getWizard) {
+const renderWizard = function (newWizard) {
   const wizardElement = setupWizardTemplate.cloneNode(true);
-  wizardElement.querySelector(`.setup-similar-label`).textContent = getWizard.name;
-  wizardElement.querySelector(`.wizard-coat`).style.fill = getWizard.coatColor;
-  wizardElement.querySelector(`.wizard-eyes`).style.fill = getWizard.eyesColor;
+  wizardElement.querySelector(`.setup-similar-label`).textContent = newWizard.name;
+  wizardElement.querySelector(`.wizard-coat`).style.fill = newWizard.coatColor;
+  wizardElement.querySelector(`.wizard-eyes`).style.fill = newWizard.eyesColor;
 
   return wizardElement;
 };
+renderWizard(getWizard);
 
 
 const fragment = document.createDocumentFragment();
