@@ -27,13 +27,15 @@ const getWizard = () => ({
 
 // array of 4 wizards
 const wizardsArr = [];
-const getWizardsArr = function (countWizards) {
+const countWizards = 4;
+const getWizardsArr = function () {
   for (let i = 0; i < countWizards; i++) {
     wizardsArr.push(getWizard());
   }
+  return wizardsArr;
 };
-getWizardsArr(4);
 
+getWizardsArr(4);
 
 const renderWizard = function (getWizard) {
   const wizardElement = setupWizardTemplate.cloneNode(true);
